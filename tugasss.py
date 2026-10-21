@@ -1,112 +1,100 @@
 import tkinter as tk
 from tkinter import messagebox
 
+def hitung_prediksi():
+    """
+    Fungsi Hasil Prediksi yang akan menuliskan prodi 'Teknologi Informasi' 
+    apapun nilai atau input yang diberikan oleh pengguna.
+    """
+    # Memeriksa apakah semua kotak input sudah diisi (validasi sederhana)
+    for entry in entry_list:
+        if not entry.get().strip():
+            messagebox.showwarning("Peringatan", "Harap isi semua nilai mata pelajaran terlebih dahulu!")
+            return
 
-def aksi_tombol():
-    nama = entry_nama.get()
-    pilihan = var_radio.get()
-    skala = scale_nilai.get()
-    
-    pesan_text = text_area.get("1.0", tk.END).strip()
-    
-    info = (
-        f"Nama: {nama if nama else '(Kosong)'}\n"
-        f"Radio Pilihan: {pilihan}\n"
-        f"Skala Nilai: {skala}\n"
-        f"Pesan Text: {pesan_text[:30]}..."
+    # Mengatur teks pada label luaran hasil prediksi
+    label_luaran.config(
+        text="Hasil Prediksi: Teknologi Informasi",
+        bg="#d4edda",
+        fg="#155724"
     )
-    messagebox.showinfo("Hasil Input Komponen", info)
-
-def buka_toplevel():
-    top = tk.Toplevel(root)
-    top.title("Jendela Toplevel (Sub-Window)")
-    top.geometry("250x150")
-    top.configure(bg="#e8f5e9")
     
-    tk.Label(top, text="Ini adalah Jendela Toplevel!", bg="#e8f5e9", font=("Arial", 10, "bold")).pack(pady=20)
-    tk.Button(top, text="Tutup Jendela", command=top.destroy).pack(pady=10)
+    # Menampilkan pesan pop-up sukses
+    messagebox.showinfo("Sukses", "Prediksi Berhasil!\nProdi Pilihan Anda: Teknologi Informasi")
+
+# Membuat jendela utama (Main Window)
 root = tk.Tk()
-root.title("Gabungan 15 Widget Tkinter Lengkap")
-root.geometry("650x750")
-root.configure(bg="#f5f5f5")
-canvas = tk.Canvas(root, bg="#1976d2", height=50, highlightthickness=0)
-canvas.pack(fill=tk.X)
-canvas.create_text(325, 25, text="DEMONSTRASI 15 WIDGET TKINTER", fill="white", font=("Arial", 12, "bold"))
-main_frame = tk.Frame(root, bg="#f5f5f5")
-main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-label_judul = tk.Label(main_frame, text="Silakan Uji Coba Berbagai Komponen Di Bawah Ini:", font=("Arial", 11, "bold"), bg="#f5f5f5")
-label_judul.pack(anchor="w", pady=(0, 5))
-paned = tk.PanedWindow(main_frame, orient=tk.VERTICAL)
-paned.pack(fill=tk.BOTH, expand=True)
+root.title("Aplikasi Prediksi Prodi Pilihan")
+root.geometry("480x600")
+root.configure(bg="#f8f9fa")
 
-frame_ atas = tk.Frame(paned, bg="#ffffff", padx=10, pady=10)
-paned.add(frame_atas)
-tk.Label(frame_atas, text="5. Entry (Nama):", bg="#ffffff").grid(row=0, column=0, sticky="w", pady=2)
-entry_nama = tk.Entry(frame_atas, width=20)
-entry_nama.grid(row=0, column=1, sticky="w", pady=2, padx=5)
-var_check = tk.IntVar()
-chk = tk.Checkbutton(frame_atas, text="4. Checkbutton (Setuju)", variable=var_check, bg="#ffffff")
-chk.grid(row=0, column=2, sticky="w", padx=10)
-var_radio = tk.StringVar(value="Opsi A")
-tk.Label(frame_atas, text="11. Radio:", bg="#ffffff").grid(row=1, column=0, sticky="w", pady=5)
-frame_radio = tk.Frame(frame_atas, bg="#ffffff")
-frame_radio.grid(row=1, column=1, sticky="w", pady=5)
-tk.Radiobutton(frame_radio, text="A", variable=var_radio, value="Opsi A", bg="#ffffff").pack(side=tk.LEFT)
-tk.Radiobutton(frame_radio, text="B", variable=var_radio, value="Opsi B", bg="#ffffff").pack(side=tk.LEFT)
-tk.Label(frame_atas, text="12. Scale:", bg="#ffffff").grid(row=2, column=0, sticky="w", pady=5)
-scale_nilai = tk.Scale(frame_atas, from_=0, to=100, orient=tk.HORIZONTAL, length=150, bg="#ffffff")
-scale_nilai.set(50)
-scale_nilai.grid(row=2, column=1, sticky="w", pady=5)
+# 1. Label Judul Aplikasi
+label_judul = tk.Label(
+    root,
+    text="Aplikasi Prediksi Prodi Pilihan",
+    font=("Arial", 16, "bold"),
+    bg="#f8f9fa",
+    fg="#333333"
+)
+label_judul.pack(pady=15)
 
-tk.Label(frame_atas, text="16. Spinbox:", bg="#ffffff").grid(row=3, column=0, sticky="w", pady=5)
-spinbox = tk.Spinbox(frame_atas, from_=1, to=5, width=5)
-spinbox.grid(row=3, column=1, sticky="w", pady=5)
+# Frame untuk menampung 10 input nilai agar lebih rapi (menggunakan LabelFrame)
+frame_input = tk.LabelFrame(
+    root,
+    text=" Masukkan Nilai 10 Mata Pelajaran ",
+    font=("Arial", 10, "bold"),
+    bg="#ffffff",
+    fg="#0056b3",
+    padx=15,
+    pady=10
+)
+frame_input.pack(padx=20, pady=5, fill="both", expand=True)
 
-frame_tengah = tk.Frame(paned, bg="#ffffff", padx=10, pady=10)
-paned.add(frame_tengah)
+# Daftar 10 mata pelajaran
+mata_pelajaran = [
+    "Matematika", "Bahasa Indonesia", "Bahasa Inggris", "Fisika", "Kimia",
+    "Biologi", "Ekonomi", "Sosiologi", "Geografi", "Informatika"
+]
 
+entry_list = []
 
-tk.Label(frame_tengah, text="8. Listbox & 13. Scrollbar:", bg="#ffffff").grid(row=0, column=0, sticky="w")
-frame_lb = tk.Frame(frame_tengah)
-frame_lb.grid(row=1, column=0, sticky="w", padx=5)
+# 2. Membuat 10 input nilai mata pelajaran menggunakan Grid layout
+for i, mp in enumerate(mata_pelajaran):
+    lbl = tk.Label(frame_input, text=f"{mp}:", bg="#ffffff", font=("Arial", 9), anchor="w")
+    lbl.grid(row=i, column=0, sticky="w", pady=4, padx=5)
+    
+    ent = tk.Entry(frame_input, width=15, font=("Arial", 9), bd=2, relief=tk.GROOVE)
+    ent.grid(row=i, column=1, pady=4, padx=5)
+    entry_list.append(ent)
 
-scrollbar = tk.Scrollbar(frame_lb, orient=tk.VERTICAL)
-listbox = tk.Listbox(frame_lb, yscrollcommand=scrollbar.set, height=4, width=15)
-for i in range(1, 11):
-    listbox.insert(tk.END, f"Item ke-{i}")
-listbox.pack(side=tk.LEFT, fill=tk.Y)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-scrollbar.config(command=listbox.yview)
+# 3. Button bertuliskan "Hasil Prediksi"
+btn_prediksi = tk.Button(
+    root,
+    text="Hasil Prediksi",
+    command=hitung_prediksi,
+    font=("Arial", 11, "bold"),
+    bg="#007bff",
+    fg="white",
+    activebackground="#0056b3",
+    activeforeground="white",
+    padx=15,
+    pady=6,
+    cursor="hand2"
+)
+btn_prediksi.pack(pady=15)
 
+# 4. Label luaran hasil prediksi
+label_luaran = tk.Label(
+    root,
+    text="Hasil Prediksi: (Belum diproses)",
+    font=("Arial", 11, "bold"),
+    bg="#e2e3e5",
+    fg="#383d41",
+    width=40,
+    height=2,
+    relief=tk.RIDGE
+)
+label_luaran.pack(pady=(0, 20))
 
-tk.Label(frame_tengah, text="14. Text Widget:", bg="#ffffff").grid(row=0, column=1, sticky="w", padx=10)
-text_area = tk.Text(frame_tengah, height=4, width=25)
-text_area.insert(tk.INSERT, "Ketik catatan di sini...")
-text_area.grid(row=1, column=1, sticky="w", padx=10)
-
-
-msg = tk.Message(frame_tengah, text="10. Message: Widget teks otomatis membungkus baris (multi-line text wrapping).", width=150, bg="#e3f2fd")
-msg.grid(row=1, column=2, padx=10, sticky="nsew")
-
-
-
-frame_bawah = tk.Frame(root, bg="#f5f5f5", pady=10)
-frame_bawah.pack(fill=tk.X)
-
-
-mb = tk.Menubutton(frame_bawah, text="9. Menubutton ▾", relief=tk.RAISED, bg="#e0e0e0")
-mb.menu = tk.Menu(mb, tearoff=0)
-mb["menu"] = mb.menu
-mb.menu.add_command(label="Menu 1", command=lambda: messagebox.showinfo("Menu", "Menu 1 diklik"))
-mb.menu.add_command(label="Menu 2", command=lambda: messagebox.showinfo("Menu", "Menu 2 diklik"))
-mb.pack(side=tk.LEFT, padx=10)
-
-
-btn_aksi = tk.Button(frame_bawah, text="2. Button (Proses Data)", command=aksi_tombol, bg="#2e7d32", fg="white", font=("Arial", 9, "bold"))
-btn_aksi.pack(side=tk.LEFT, padx=10)
-
-
-btn_top = tk.Button(frame_bawah, text="15. Buka Toplevel Window", command=buka_toplevel, bg="#0277bd", fg="white")
-btn_top.pack(side=tk.LEFT, padx=10)
-
+# Menjalankan aplikasi utama
 root.mainloop()
