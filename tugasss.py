@@ -38,3 +38,6 @@ label_judul = tk.Label(main_frame, text="Silakan Uji Coba Berbagai Komponen Di B
 label_judul.pack(anchor="w", pady=(0, 5))
 paned = tk.PanedWindow(main_frame, orient=tk.VERTICAL)
 paned.pack(fill=tk.BOTH, expand=True)
+
+frame_ atas = tk.Frame(paned, bg="#ffffff", padx=10, pady=10)
+paned.add(frame_atas)
