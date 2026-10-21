@@ -83,3 +83,30 @@ tk.Label(frame_tengah, text="14. Text Widget:", bg="#ffffff").grid(row=0, column
 text_area = tk.Text(frame_tengah, height=4, width=25)
 text_area.insert(tk.INSERT, "Ketik catatan di sini...")
 text_area.grid(row=1, column=1, sticky="w", padx=10)
+
+
+msg = tk.Message(frame_tengah, text="10. Message: Widget teks otomatis membungkus baris (multi-line text wrapping).", width=150, bg="#e3f2fd")
+msg.grid(row=1, column=2, padx=10, sticky="nsew")
+
+
+
+frame_bawah = tk.Frame(root, bg="#f5f5f5", pady=10)
+frame_bawah.pack(fill=tk.X)
+
+
+mb = tk.Menubutton(frame_bawah, text="9. Menubutton ▾", relief=tk.RAISED, bg="#e0e0e0")
+mb.menu = tk.Menu(mb, tearoff=0)
+mb["menu"] = mb.menu
+mb.menu.add_command(label="Menu 1", command=lambda: messagebox.showinfo("Menu", "Menu 1 diklik"))
+mb.menu.add_command(label="Menu 2", command=lambda: messagebox.showinfo("Menu", "Menu 2 diklik"))
+mb.pack(side=tk.LEFT, padx=10)
+
+
+btn_aksi = tk.Button(frame_bawah, text="2. Button (Proses Data)", command=aksi_tombol, bg="#2e7d32", fg="white", font=("Arial", 9, "bold"))
+btn_aksi.pack(side=tk.LEFT, padx=10)
+
+
+btn_top = tk.Button(frame_bawah, text="15. Buka Toplevel Window", command=buka_toplevel, bg="#0277bd", fg="white")
+btn_top.pack(side=tk.LEFT, padx=10)
+
+root.mainloop()
