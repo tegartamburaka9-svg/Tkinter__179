@@ -61,3 +61,25 @@ scale_nilai.grid(row=2, column=1, sticky="w", pady=5)
 tk.Label(frame_atas, text="16. Spinbox:", bg="#ffffff").grid(row=3, column=0, sticky="w", pady=5)
 spinbox = tk.Spinbox(frame_atas, from_=1, to=5, width=5)
 spinbox.grid(row=3, column=1, sticky="w", pady=5)
+
+frame_tengah = tk.Frame(paned, bg="#ffffff", padx=10, pady=10)
+paned.add(frame_tengah)
+
+
+tk.Label(frame_tengah, text="8. Listbox & 13. Scrollbar:", bg="#ffffff").grid(row=0, column=0, sticky="w")
+frame_lb = tk.Frame(frame_tengah)
+frame_lb.grid(row=1, column=0, sticky="w", padx=5)
+
+scrollbar = tk.Scrollbar(frame_lb, orient=tk.VERTICAL)
+listbox = tk.Listbox(frame_lb, yscrollcommand=scrollbar.set, height=4, width=15)
+for i in range(1, 11):
+    listbox.insert(tk.END, f"Item ke-{i}")
+listbox.pack(side=tk.LEFT, fill=tk.Y)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+scrollbar.config(command=listbox.yview)
+
+
+tk.Label(frame_tengah, text="14. Text Widget:", bg="#ffffff").grid(row=0, column=1, sticky="w", padx=10)
+text_area = tk.Text(frame_tengah, height=4, width=25)
+text_area.insert(tk.INSERT, "Ketik catatan di sini...")
+text_area.grid(row=1, column=1, sticky="w", padx=10)
