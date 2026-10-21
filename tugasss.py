@@ -25,3 +25,7 @@ def buka_toplevel():
     
     tk.Label(top, text="Ini adalah Jendela Toplevel!", bg="#e8f5e9", font=("Arial", 10, "bold")).pack(pady=20)
     tk.Button(top, text="Tutup Jendela", command=top.destroy).pack(pady=10)
+root = tk.Tk()
+root.title("Gabungan 15 Widget Tkinter Lengkap")
+root.geometry("650x750")
+root.configure(bg="#f5f5f5")
