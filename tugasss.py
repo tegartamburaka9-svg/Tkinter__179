@@ -41,3 +41,6 @@ paned.pack(fill=tk.BOTH, expand=True)
 
 frame_ atas = tk.Frame(paned, bg="#ffffff", padx=10, pady=10)
 paned.add(frame_atas)
+tk.Label(frame_atas, text="5. Entry (Nama):", bg="#ffffff").grid(row=0, column=0, sticky="w", pady=2)
+entry_nama = tk.Entry(frame_atas, width=20)
+entry_nama.grid(row=0, column=1, sticky="w", pady=2, padx=5)
