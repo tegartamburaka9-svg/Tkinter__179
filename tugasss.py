@@ -16,3 +16,12 @@ def aksi_tombol():
         f"Pesan Text: {pesan_text[:30]}..."
     )
     messagebox.showinfo("Hasil Input Komponen", info)
+
+def buka_toplevel():
+    top = tk.Toplevel(root)
+    top.title("Jendela Toplevel (Sub-Window)")
+    top.geometry("250x150")
+    top.configure(bg="#e8f5e9")
+    
+    tk.Label(top, text="Ini adalah Jendela Toplevel!", bg="#e8f5e9", font=("Arial", 10, "bold")).pack(pady=20)
+    tk.Button(top, text="Tutup Jendela", command=top.destroy).pack(pady=10)
